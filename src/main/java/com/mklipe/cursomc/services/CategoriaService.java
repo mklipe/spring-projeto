@@ -1,5 +1,6 @@
 package com.mklipe.cursomc.services;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,9 @@ public class CategoriaService {
 		return obj.orElse(null);
 		
 	}
+	
+	public void salvar() {
+		//repo.saveAll(Arrays.asList(cat1, cat2));
+	}
+	
 }
