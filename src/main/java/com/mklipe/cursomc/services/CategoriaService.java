@@ -9,8 +9,6 @@ import com.mklipe.cursomc.domain.Categoria;
 import com.mklipe.cursomc.repositories.CategoriaRepository;
 import com.mklipe.cursomc.services.exceptions.ObjectNotFoundException;
 
-
-
 @Service
 public class CategoriaService {
 	

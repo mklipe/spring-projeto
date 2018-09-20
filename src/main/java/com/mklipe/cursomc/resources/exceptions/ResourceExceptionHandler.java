@@ -1,4 +1,4 @@
-package com.mklipe.cursomc.resources.exception;
+package com.mklipe.cursomc.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
