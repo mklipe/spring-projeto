@@ -1,12 +1,16 @@
 package com.mklipe.cursomc.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.mklipe.cursomc.domain.Categoria;
+import com.mklipe.cursomc.dto.CategoriaDTO;
 import com.mklipe.cursomc.repositories.CategoriaRepository;
 import com.mklipe.cursomc.services.exceptions.DataIntegrityException;
 import com.mklipe.cursomc.services.exceptions.ObjectNotFoundException;
@@ -44,6 +48,14 @@ public class CategoriaService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos cadastrados.");
 		}
+	}
+
+	public List<CategoriaDTO> findAll() {
+		List<Categoria> lista = repo.findAll();
+		List<CategoriaDTO> listaDTO = 
+				lista.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+			
+		return listaDTO;
 	} 
 	
 }
