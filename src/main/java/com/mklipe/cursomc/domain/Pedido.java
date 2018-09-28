@@ -37,7 +37,6 @@ public class Pedido implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -70,6 +69,18 @@ public class Pedido implements Serializable {
 		
 		return lista;
 	}
+	
+	public double getValorTotal() {
+		double soma = 0; 
+		
+		for (ItemPedido itemPedido : itens) {
+			soma = soma + itemPedido.getSubTotal();
+		}
+		
+		return soma;
+		
+	}
+	
 	
 	public Integer getId() {
 		return id;
