@@ -1,4 +1,4 @@
-package br.com.ligacidade.resources.exceptions;
+package com.mklipe.cursomc.resources.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

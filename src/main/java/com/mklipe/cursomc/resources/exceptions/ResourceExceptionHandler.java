@@ -1,4 +1,4 @@
-package br.com.ligacidade.resources.exceptions;
+package com.mklipe.cursomc.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.ligacidade.services.exceptions.DataIntegrityException;
-import br.com.ligacidade.services.exceptions.ObjectNotFoundException;
+import com.mklipe.cursomc.services.exceptions.DataIntegrityException;
+import com.mklipe.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
