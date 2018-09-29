@@ -120,7 +120,7 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Cliente cli1 = 
-				new Cliente(null, "Maria Silva", "maria@gmail.com", "08821721145", TipoCliente.PESSOAFISICA);
+				new Cliente(null, "Maria Silva", "klipem@gmail.com", "08821721145", TipoCliente.PESSOAFISICA);
 		
 		cli1.getTelefones().add("98389393");
 		cli1.getTelefones().add("27363323");
