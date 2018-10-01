@@ -60,6 +60,9 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
 	public void instantiateTestDataBase() throws ParseException {
 		
 		
@@ -120,20 +123,30 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Cliente cli1 = 
-				new Cliente(null, "Maria Silva", "maria@gmail.com", "08821721145", TipoCliente.PESSOAFISICA);
-		
+				new Cliente(null, "Maria Silva", "maria@gmail.com", "08821721145", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+
 		cli1.getTelefones().add("98389393");
 		cli1.getTelefones().add("27363323");
+
+		Cliente cli2 = 
+				new Cliente(null, "Ana Silv Costa", "ana@gmail.com", "07138937966", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+
+		cli2.addPerfil(Prfil.ADMIN);
+		
+		cli2.getTelefones().add("981360533");
+		cli2.getTelefones().add("30552787");
 		
 		Endereco end1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
 		Endereco end2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "382777012", cli1, c2);
+		Endereco end3 = new Endereco(null, "Avenida Floriano", "10", "Sala 8", "Centro", "382777012", cli2, c2);
 		
 		cli1.getEnderecos().add(end1);
 		cli1.getEnderecos().add(end2);
-			
-		clienteRepository.save(cli1);
+		cli2.getEnderecos().add(end3);
+
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
 		
-		enderecoRepository.saveAll(Arrays.asList(end1, end2));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));
 		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");

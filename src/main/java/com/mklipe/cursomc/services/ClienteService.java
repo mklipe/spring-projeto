@@ -33,8 +33,17 @@ public class ClienteService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public Cliente find(Integer id) {
+		UserSS user = UserService.authenticated();
+
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+			throw new AuthorizationException("Acesso negado!");
+		}
+
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -91,12 +100,12 @@ public class ClienteService {
 	}
 	
 	public Cliente fromDTO(ClienteDTO objDTO){
-		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail());
+		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null);
 	}
 
 	public Cliente fromDTO(@Valid ClienteNewDTO objDTO) {
 		Cliente cli = 
-				new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipo()));
+				new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipo()), passwordEncoder.encode(objDTO.getSenha()) );
 		
 		Cidade cid = new Cidade(objDTO.getCidadeId(), null, null);
 		
