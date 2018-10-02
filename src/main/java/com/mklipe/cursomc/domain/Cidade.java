@@ -23,6 +23,7 @@ public class Cidade implements Serializable{
 	private Estado estado;
 	
 	public Cidade() {
+	
 	}
 
 	public Cidade(Integer id, String nome, Estado estado) {
