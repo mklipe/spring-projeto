@@ -27,9 +27,17 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	private String email;
+	
+	@JsonIgnore
+	private String senha;
+
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name ="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+
 	@ElementCollection
 	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
@@ -42,22 +50,27 @@ public class Cliente implements Serializable {
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
+		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.senha = senha;
+		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(Integer id, String nome, String email) {
+	public Cliente(Integer id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -75,6 +88,15 @@ public class Cliente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 
 	public String getEmail() {
 		return email;
@@ -103,6 +125,15 @@ public class Cliente implements Serializable {
 	public Set<String> getTelefones() {
 		return telefones;
 	}
+
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map( x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil){
+		perfis().add(perfil.getCod());
+	}
+
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
