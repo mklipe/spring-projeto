@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mklipe.cursomc.domain.Categoria;
@@ -19,6 +20,7 @@ import com.mklipe.cursomc.domain.PagamentoComCartao;
 import com.mklipe.cursomc.domain.Pedido;
 import com.mklipe.cursomc.domain.Produto;
 import com.mklipe.cursomc.domain.enums.EstadoPagamento;
+import com.mklipe.cursomc.domain.enums.Perfil;
 import com.mklipe.cursomc.domain.enums.TipoCliente;
 import com.mklipe.cursomc.repositories.CategoriaRepository;
 import com.mklipe.cursomc.repositories.CidadeRepository;
@@ -131,7 +133,7 @@ public class DBService {
 		Cliente cli2 = 
 				new Cliente(null, "Ana Silv Costa", "ana@gmail.com", "07138937966", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 
-		cli2.addPerfil(Prfil.ADMIN);
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		cli2.getTelefones().add("981360533");
 		cli2.getTelefones().add("30552787");

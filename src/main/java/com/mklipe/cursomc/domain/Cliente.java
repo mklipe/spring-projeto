@@ -5,17 +5,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mklipe.cursomc.domain.enums.Perfil;
 import com.mklipe.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -131,7 +134,7 @@ public class Cliente implements Serializable {
 	}
 
 	public void addPerfil(Perfil perfil){
-		perfis().add(perfil.getCod());
+		perfis.add(perfil.getCod());
 	}
 
 

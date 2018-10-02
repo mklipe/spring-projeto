@@ -11,17 +11,21 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mklipe.cursomc.domain.Cidade;
 import com.mklipe.cursomc.domain.Cliente;
 import com.mklipe.cursomc.domain.Endereco;
+import com.mklipe.cursomc.domain.enums.Perfil;
 import com.mklipe.cursomc.domain.enums.TipoCliente;
 import com.mklipe.cursomc.dto.ClienteDTO;
 import com.mklipe.cursomc.dto.ClienteNewDTO;
 import com.mklipe.cursomc.repositories.ClienteRepository;
 import com.mklipe.cursomc.repositories.EnderecoRepository;
+import com.mklipe.cursomc.security.UserSS;
+import com.mklipe.cursomc.services.exceptions.AuthorizationException;
 import com.mklipe.cursomc.services.exceptions.DataIntegrityException;
 import com.mklipe.cursomc.services.exceptions.ObjectNotFoundException;
 

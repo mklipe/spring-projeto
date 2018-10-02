@@ -16,7 +16,7 @@ import com.mklipe.cursomc.services.MockEmailService;
 public class TestConfig {
 	
 	@Autowired
-	DBService dbService;
+	private DBService dbService;
 	
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
@@ -28,4 +28,6 @@ public class TestConfig {
 	public EmailService emailService() {
 		return new MockEmailService();
 	}
+	
+	
 }

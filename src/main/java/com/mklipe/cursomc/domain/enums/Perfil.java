@@ -25,7 +25,7 @@ public enum Perfil {
 			return null;
 		}
 		
-		for (TipoCliente x : TipoCliente.values()) {
+		for (Perfil x : Perfil.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}

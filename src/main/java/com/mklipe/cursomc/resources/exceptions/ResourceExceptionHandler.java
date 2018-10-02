@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.mklipe.cursomc.services.exceptions.AuthorizationException;
 import com.mklipe.cursomc.services.exceptions.DataIntegrityException;
 import com.mklipe.cursomc.services.exceptions.ObjectNotFoundException;
 
