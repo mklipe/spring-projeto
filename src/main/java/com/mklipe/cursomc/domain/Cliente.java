@@ -31,6 +31,8 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	
+	private String imageUrl;
+	
 	@JsonIgnore
 	private String senha;
 
@@ -181,6 +183,14 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }
