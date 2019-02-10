@@ -24,8 +24,9 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException exception, 
 			HttpServletRequest request)
 	{
-		StandardError erro = 
-				new StandardError(HttpStatus.NOT_FOUND.value(), exception.getMessage(), System.currentTimeMillis());
+		StandardError erro =
+				new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), 
+						"Não encontrado", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
@@ -35,7 +36,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		StandardError erro = 
-				new StandardError(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
+						"Integridade dos dados", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
@@ -45,7 +47,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		ValidationError erro = 
-				new ValidationError(HttpStatus.NOT_FOUND.value(), "Erro de validação", System.currentTimeMillis());
+				new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), 
+						"Erro de validação", exception.getMessage(), request.getRequestURI());
 		
 		
 		for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
@@ -53,7 +56,7 @@ public class ResourceExceptionHandler {
 		}
 		
 		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(erro);
 	}
 
 	@ExceptionHandler(AuthorizationException.class)
@@ -61,7 +64,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		StandardError erro = 
-				new StandardError(HttpStatus.FORBIDDEN.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), 
+						"Acesso negado", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
 	}
@@ -71,7 +75,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		StandardError erro = 
-				new StandardError(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
+						"Erro de arquivo", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
@@ -83,7 +88,9 @@ public class ResourceExceptionHandler {
 		HttpStatus code = HttpStatus.valueOf(exception.getErrorCode());
 		
 		StandardError erro = 
-				new StandardError(code.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), code.value(), 
+						"Erro Amazon Service", exception.getMessage(), request.getRequestURI());
+				
 		
 		return ResponseEntity.status(code).body(erro);
 	}
@@ -93,7 +100,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		StandardError erro = 
-				new StandardError(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
+						"Erro Amazon Client", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
@@ -103,7 +111,8 @@ public class ResourceExceptionHandler {
 			HttpServletRequest request)
 	{
 		StandardError erro = 
-				new StandardError(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), System.currentTimeMillis());
+				new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
+						"Erro Amazon S3", exception.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
